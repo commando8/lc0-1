@@ -277,6 +277,7 @@ bool Node::MakeSolid() {
   std::unique_ptr<Node> old_child = std::move(child_);
   while (old_child) {
     int index = old_child->index_;
+    edges_[index].SetP(old_child->GetN() / this->GetN());
     new_children[index] = std::move(*old_child.get());
     // This isn't needed, but it helps crash things faster if something has gone wrong.
     old_child->parent_ = nullptr;
